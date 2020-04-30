@@ -11,12 +11,31 @@ class Page extends Component {
     };
   }
 
+  onEdit = () => {
+    this.setState({
+      isEditing: true,
+    });
+  };
+
+  onCancel = () => {
+    this.setState({
+      isEditing: false,
+    });
+  };
+
   render() {
     if (this.state.isEditing) {
-      return <PageEditor {...this.props} />;
+      return (
+        <PageEditor
+          {...this.props}
+          onCancel={this.onCancel}
+        />
+      );
     }
 
-    return <PageView {...this.props} />;
+    return (
+      <PageView {...this.props} onEdit={this.onEdit} />
+    );
   }
 }
 

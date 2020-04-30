@@ -16,15 +16,37 @@ class PageAdmin extends Component {
     });
   }
 
+  onUpdate = (...params) => {
+    this.props.backend.update(...params);
+
+    this.setState({
+      pages: this.props.backend.getAll(),
+    });
+  };
+
+  onDelete = (...params) => {
+    this.props.backend.delete(...params);
+
+    this.setState({
+      pages: this.props.backend.getAll(),
+    });
+  };
+
   render() {
     return (
       <div>
         <ol>
-          {this.state.pages.map((page) => (
-            <li key={page.id}>
-              <Page {...page} />
-            </li>
-          ))}
+          {this.state.pages
+            ? this.state.pages.map((page) => (
+              <li key={page.id}>
+                <Page
+                  {...page}
+                  onUpdate={this.onUpdate}
+                  onDelete={this.onDelete}
+                />
+              </li>
+            ))
+            : 'Undefined...'}
         </ol>
       </div>
     );

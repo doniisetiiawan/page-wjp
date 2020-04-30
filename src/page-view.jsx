@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-function PageView(props) {
-  return (
-    <div>
-      {props.title}
-      <button type="button">edit</button>
-      <button type="button">delete</button>
-    </div>
-  );
+class PageView extends Component {
+  onDelete = () => {
+    this.props.onDelete(
+      this.props.id,
+    );
+  };
+
+  render() {
+    return (
+      <div>
+        {this.props.title}
+        <button type="button" onClick={this.props.onEdit}>
+          edit
+        </button>
+        <button type="button" onClick={this.onDelete}>
+          delete
+        </button>
+      </div>
+    );
+  }
 }
 
 export default PageView;
