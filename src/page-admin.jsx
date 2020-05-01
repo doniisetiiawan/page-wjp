@@ -36,6 +36,14 @@ class PageAdmin extends Component {
   };
 
   render() {
+    const addButtonClassNames = [
+      'mdl-button',
+      'mdl-js-button',
+      'mdl-button--fab',
+      'mdl-js-ripple-effect',
+      'mdl-button--colored',
+    ].join(' ');
+
     const itemStyle = this.props.itemStyle || {
       minHeight: '40px',
       lineHeight: '40px',
@@ -46,8 +54,12 @@ class PageAdmin extends Component {
     return (
       <div>
         <div>
-          <button type="button" onClick={this.onInsert}>
-            create new page
+          <button
+            type="button"
+            onClick={this.onInsert}
+            className={addButtonClassNames}
+          >
+            <i className="material-icons">add</i>
           </button>
         </div>
         <ol>
