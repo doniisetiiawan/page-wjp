@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import {
+  CSSTransition,
+  TransitionGroup,
+} from 'react-transition-group';
 import Page from './page';
 import Backend from './backend';
 
@@ -47,17 +51,25 @@ class PageAdmin extends Component {
           </button>
         </div>
         <ol>
-          {this.state.pages
-            ? this.state.pages.map((page) => (
-              <li key={page.id} style={itemStyle}>
-                <Page
-                  {...page}
-                  onUpdate={this.onUpdate}
-                  onDelete={this.onDelete}
-                />
-              </li>
-            ))
-            : 'Undefined...'}
+          <TransitionGroup>
+            {this.state.pages
+              ? this.state.pages.map((page) => (
+                <CSSTransition
+                  key={page.id}
+                  timeout={500}
+                  classNames="my-node"
+                >
+                  <li key={page.id} style={itemStyle}>
+                    <Page
+                      {...page}
+                      onUpdate={this.onUpdate}
+                      onDelete={this.onDelete}
+                    />
+                  </li>
+                </CSSTransition>
+              ))
+              : 'Undefined...'}
+          </TransitionGroup>
         </ol>
       </div>
     );
