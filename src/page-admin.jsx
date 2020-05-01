@@ -19,6 +19,10 @@ class PageAdmin extends Component {
     });
   }
 
+  onInsert = () => {
+    this.props.backend.insert();
+  };
+
   onUpdate = (id, field, value) => {
     this.props.backend.update(id, field, value);
   };
@@ -28,12 +32,24 @@ class PageAdmin extends Component {
   };
 
   render() {
+    const itemStyle = this.props.itemStyle || {
+      minHeight: '40px',
+      lineHeight: '40px',
+      fontSize: '18px',
+      fontFamily: 'Helvetica',
+    };
+
     return (
       <div>
+        <div>
+          <button type="button" onClick={this.onInsert}>
+            create new page
+          </button>
+        </div>
         <ol>
           {this.state.pages
             ? this.state.pages.map((page) => (
-              <li key={page.id}>
+              <li key={page.id} style={itemStyle}>
                 <Page
                   {...page}
                   onUpdate={this.onUpdate}

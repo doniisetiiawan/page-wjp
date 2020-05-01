@@ -24,6 +24,7 @@
     "react/jsx-props-no-spreading": "off",
     "eqeqeq": "off",
     "consistent-return": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "no-plusplus": "off"
   }
 }

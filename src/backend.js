@@ -5,8 +5,29 @@ class Backend extends EventEmitter {
   constructor() {
     super();
 
-    this.pages = LocalStore.get('pages', []);
+    const pages = LocalStore.get('pages', []);
+
+    this.id = 1;
+
+    this.pages = pages.map((page) => {
+      page.id = this.id++;
+      return page;
+    });
   }
+
+  insert = () => {
+    this.pages.push({
+      id: this.id,
+      title: `New page ${this.id}`,
+      body: '',
+    });
+
+    this.id++;
+
+    LocalStore.set('pages', this.pages);
+
+    this.emit('update', this.pages);
+  };
 
   all = () => this.pages;
 
