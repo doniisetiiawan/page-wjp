@@ -29,7 +29,7 @@ class PageAdmin extends Component {
     this.props.backend.delete(...params);
 
     this.setState({
-      pages: this.props.backend.getAll(),
+      pages: this.props.backend.all(),
     });
   };
 
