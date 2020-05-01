@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './example.css';
 import App from './page-admin';
 import Backend from './backend';
 import * as serviceWorker from './serviceWorker';

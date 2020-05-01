@@ -36,6 +36,11 @@ class PageAdmin extends Component {
   };
 
   render() {
+    const contentClassNames = [
+      'mdl-layout__content',
+      'mdl-color--grey-100',
+    ].join(' ');
+
     const addButtonClassNames = [
       'mdl-button',
       'mdl-js-button',
@@ -52,16 +57,14 @@ class PageAdmin extends Component {
     };
 
     return (
-      <div>
-        <div>
-          <button
-            type="button"
-            onClick={this.onInsert}
-            className={addButtonClassNames}
-          >
-            <i className="material-icons">add</i>
-          </button>
-        </div>
+      <div className={contentClassNames}>
+        <button
+          type="button"
+          onClick={this.onInsert}
+          className={addButtonClassNames}
+        >
+          <i className="material-icons">add</i>
+        </button>
         <ol>
           <TransitionGroup>
             {this.state.pages
