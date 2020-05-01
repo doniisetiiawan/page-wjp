@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class pageEditor extends Component {
   onCancel = (event) => {
@@ -39,3 +40,11 @@ class pageEditor extends Component {
 }
 
 export default pageEditor;
+
+pageEditor.propTypes = {
+  body: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+};

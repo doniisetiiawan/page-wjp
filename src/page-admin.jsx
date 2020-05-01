@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Page from './page';
+import Backend from './backend';
 
 class PageAdmin extends Component {
   constructor(props) {
@@ -54,3 +55,15 @@ class PageAdmin extends Component {
 }
 
 export default PageAdmin;
+
+PageAdmin.propTypes = {
+  // eslint-disable-next-line no-unused-vars,react/require-default-props
+  backend(props, propName, componentName) {
+    if (props.backend instanceof Backend) {
+      return;
+    }
+    return new Error(
+      'Required prop `backend` is not a `Backend`.',
+    );
+  },
+};

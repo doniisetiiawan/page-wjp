@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class PageView extends Component {
   onDelete = () => {
@@ -23,3 +24,10 @@ class PageView extends Component {
 }
 
 export default PageView;
+
+PageView.propTypes = {
+  id: PropTypes.number.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+};
