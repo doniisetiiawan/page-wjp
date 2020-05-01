@@ -9,6 +9,8 @@ class PageAdmin extends Component {
     this.state = {
       pages: [],
     };
+
+    this.props.backend.on('update', (pages) => this.setState({ pages }));
   }
 
   componentDidMount() {
@@ -17,20 +19,12 @@ class PageAdmin extends Component {
     });
   }
 
-  onUpdate = (...params) => {
-    this.props.backend.update(...params);
-
-    this.setState({
-      pages: this.props.backend.all(),
-    });
+  onUpdate = (id, field, value) => {
+    this.props.backend.update(id, field, value);
   };
 
-  onDelete = (...params) => {
-    this.props.backend.delete(...params);
-
-    this.setState({
-      pages: this.props.backend.all(),
-    });
+  onDelete = (id) => {
+    this.props.backend.delete(id);
   };
 
   render() {

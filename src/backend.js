@@ -1,15 +1,16 @@
+import EventEmitter from 'event-emitter';
 import LocalStore from './local-storage';
 
-class Backend {
+class Backend extends EventEmitter {
   constructor() {
+    super();
+
     this.pages = LocalStore.get('pages', []);
   }
 
-  all() {
-    return this.pages;
-  }
+  all = () => this.pages;
 
-  update(id, property, value) {
+  update = (id, property, value) => {
     this.pages = this.pages.map((page) => {
       if (page.id == id) {
         page[property] = value;
@@ -19,15 +20,19 @@ class Backend {
     });
 
     LocalStore.set('pages', this.pages);
-  }
 
-  delete(id) {
+    this.emit('update', this.pages);
+  };
+
+  delete = (id) => {
     this.pages = this.pages.filter(
       (page) => page.id !== id,
     );
 
     LocalStore.set('pages', this.pages);
-  }
+
+    this.emit('update', this.pages);
+  };
 }
 
 export default Backend;
