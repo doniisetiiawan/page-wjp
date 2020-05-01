@@ -1,54 +1,34 @@
+import LocalStore from './local-storage';
+
 class Backend {
   constructor() {
-    this.deleted = [];
-    this.updates = [];
-
-    this.pages = [
-      {
-        id: 1,
-        title: 'Home',
-        body: '...',
-      },
-      {
-        id: 2,
-        title: 'About Us',
-        body: '...',
-      },
-      {
-        id: 3,
-        title: 'Contact Us',
-        body: '...',
-      },
-      {
-        id: 4,
-        title: 'Products',
-        body: '...',
-      },
-    ];
+    this.pages = LocalStore.get('pages', []);
   }
 
-  getAll() {
-    return this.pages
-      .filter((page) => !this.deleted.includes(page.id))
-      .map((page) => {
-        const modified = page;
-
-        this.updates.forEach((update) => {
-          if (update[0] == page.id) {
-            modified[update[1]] = update[2];
-          }
-        });
-
-        return modified;
-      });
+  all() {
+    return this.pages;
   }
 
   update(id, property, value) {
-    this.updates.push([id, property, value]);
+    this.pages = this.pages.map((page) => {
+      if (page.id == id) {
+        page[property] = value;
+      }
+
+      return page;
+    });
+
+    LocalStore.set('pages', this.pages);
+
+    this.emit('update', this.pages);
   }
 
   delete(id) {
-    this.deleted.push(id);
+    this.pages = this.pages.filter(
+      (page) => page.id !== id,
+    );
+
+    LocalStore.set('pages', this.pages);
   }
 }
 

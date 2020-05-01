@@ -13,7 +13,7 @@ class PageAdmin extends Component {
 
   componentDidMount() {
     this.setState({
-      pages: this.props.backend.getAll(),
+      pages: this.props.backend.all(),
     });
   }
 
@@ -21,7 +21,7 @@ class PageAdmin extends Component {
     this.props.backend.update(...params);
 
     this.setState({
-      pages: this.props.backend.getAll(),
+      pages: this.props.backend.all(),
     });
   };
 

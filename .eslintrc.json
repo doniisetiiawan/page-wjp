@@ -23,6 +23,7 @@
     "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",
     "eqeqeq": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "no-param-reassign": "off"
   }
 }
