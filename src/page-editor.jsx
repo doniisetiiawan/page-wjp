@@ -2,6 +2,28 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class pageEditor extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      changed: false,
+    };
+  }
+
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(props) {
+    this.setState({
+      changed: this.isChanged(props, this.props),
+    });
+  }
+
+  isChanged = (next, previous) => JSON.stringify(next) !== JSON.stringify(previous);
+
+  onSave = (event) => {
+    event.preventDefault();
+    this.props.onSave();
+  };
+
   onCancel = (event) => {
     event.preventDefault();
     this.props.onCancel();
@@ -16,6 +38,21 @@ class pageEditor extends Component {
   };
 
   render() {
+    let cancelButtonStyle = null;
+    let saveButton = null;
+
+    if (this.state.changed) {
+      cancelButtonStyle = this.props.cancelButtonStyle || {
+        margin: '0 0 0 10px',
+      };
+
+      saveButton = (
+        <button type="button" onClick={this.onSave}>
+          save
+        </button>
+      );
+    }
+
     return (
       <div>
         <form>
@@ -30,7 +67,12 @@ class pageEditor extends Component {
             value={this.props.body}
             onChange={this.onUpdate}
           />
-          <button type="button" onClick={this.onCancel}>
+          {saveButton}
+          <button
+            type="button"
+            style={cancelButtonStyle}
+            onClick={this.onCancel}
+          >
             back
           </button>
         </form>

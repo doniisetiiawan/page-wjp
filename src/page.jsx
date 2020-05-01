@@ -14,10 +14,23 @@ class Page extends Component {
   onEdit = () => {
     this.setState({
       isEditing: true,
+      title: this.props.title,
+    });
+  };
+
+  onSave = () => {
+    this.setState({
+      isEditing: false,
     });
   };
 
   onCancel = () => {
+    this.props.onUpdate(
+      this.props.id,
+      'title',
+      this.state.title,
+    );
+
     this.setState({
       isEditing: false,
     });
@@ -29,6 +42,7 @@ class Page extends Component {
         <PageEditor
           {...this.props}
           onCancel={this.onCancel}
+          onSave={this.onSave}
         />
       );
     }
