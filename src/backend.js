@@ -19,8 +19,6 @@ class Backend {
     });
 
     LocalStore.set('pages', this.pages);
-
-    this.emit('update', this.pages);
   }
 
   delete(id) {
