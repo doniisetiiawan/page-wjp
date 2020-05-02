@@ -74,13 +74,12 @@ class PageAdmin extends Component {
                   timeout={500}
                   classNames="my-node"
                 >
-                  <li key={page.id} style={itemStyle}>
-                    <Page
-                      {...page}
-                      onUpdate={this.onUpdate}
-                      onDelete={this.onDelete}
-                    />
-                  </li>
+                  <Page
+                    {...page}
+                    key={page.id}
+                    onUpdate={this.onUpdate}
+                    onDelete={this.onDelete}
+                  />
                 </CSSTransition>
               ))
               : 'Undefined...'}
